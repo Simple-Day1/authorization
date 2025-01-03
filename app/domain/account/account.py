@@ -1,7 +1,7 @@
 from typing import Self
 
 
-class User:
+class Account:
     def __init__(self: Self,
                  user_id: int,
                  username: str,
@@ -16,6 +16,11 @@ class User:
         self.email = email
         self.password = password
 
-    @classmethod
-    def create_user(cls):
+    def sign_up_account(self):
+        ...
+
+    def sign_in_account(self):
+        ...
+    
+    def change_password(self):
         ...

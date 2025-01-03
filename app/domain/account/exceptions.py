@@ -1,10 +1,11 @@
-class UserNotFoundError(Exception):
+class AccountNotFoundError(Exception):
     ...
 
 
-class UserIsAlreadyExistError(Exception):
+class AccountIsAlreadyExistError(Exception):
     ...
 
 
 class WrongPasswordError(Exception):
     ...
+
