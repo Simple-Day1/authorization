@@ -1,2 +1,10 @@
-class UserWasCreated:
+class AccountIsSignedUp:
+    ...
+
+
+class AccountIsSignedIn:
+    ...
+
+
+class PasswordIsChanged:
     ...
