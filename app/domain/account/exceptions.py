@@ -1,11 +1,17 @@
-class AccountNotFoundError(Exception):
+from domain.shared.exception import DomainError
+
+
+class AccountNotFoundError(DomainError):
     ...
 
 
-class AccountIsAlreadyExistError(Exception):
+class AccountIsAlreadyExistError(DomainError):
     ...
 
 
-class WrongPasswordError(Exception):
+class WrongPasswordError(DomainError):
     ...
 
+
+class WrongPhoneError(DomainError):
+    ...
