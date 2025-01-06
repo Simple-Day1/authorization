@@ -9,10 +9,6 @@ class UserAlreadyExistError(DomainError):
     ...
 
 
-class WrongPasswordError(DomainError):
-    ...
-
-
 class PasswordValidationError(DomainError):
     ...
 
