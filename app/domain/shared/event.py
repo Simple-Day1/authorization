@@ -3,6 +3,6 @@ from datetime import datetime, UTC
 from dataclasses import dataclass, field
 
 @dataclass(frozen=True, kw_only=True)
-class Event:
+class DomainEvent:
     event_uuid: UUID = field(default_factory=uuid4, init=False)
     event_occured_at: datetime = field(default=datetime.now(UTC), init=False)
