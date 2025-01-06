@@ -1,3 +1,6 @@
+from dataclasses import dataclass, field
+
+
+@dataclass(eq=True)
 class DomainError(Exception):
-    def __init__(self, massage: str = 'Dommain error occured'):
-        self.massage = massage
+    massage: str = field(default='Dommain error occured')

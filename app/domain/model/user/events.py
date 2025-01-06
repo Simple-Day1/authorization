@@ -1,42 +1,43 @@
 from domain.shared.event import DomainEvent
 from uuid import UUID
+from dataclasses import dataclass
 
 
+@dataclass(frozen=True)
 class UserCreated(DomainEvent):
-    def __init__(self,
-                  user_id: UUID,
-                  username: str,
-                  password: str,
-                  phone: int,
-                  email: str,
-                  date_of_born: str):
-        self.user_id = user_id
-        self.username = username
-        self.password = password
-        self.phone = phone
-        self.email = email
-        self.date_of_born = date_of_born
+    user_id: UUID
+    username: str
+    password: str
+    phone: int
+    email: str
+    date_of_born: str
 
 
-class UserIsSignedIn(DomainEvent):
-    def __init__(self,
-                  user_id: UUID,
-                  username: str,
-                  password: str,
-                  phone: int,
-                  email: str,
-                  date_of_born: str):
-        self.user_id = user_id
-        self.username = username
-        self.password = password
-        self.phone = phone
-        self.email = email
-        self.date_of_born = date_of_born
+@dataclass(frozen=True)
+class UsernameIsChanged(DomainEvent):
+    user_id: UUID
+    username: str
 
 
+@dataclass(frozen=True)
 class PasswordIsChanged(DomainEvent):
-    def __init__(self,
-                 user_id: UUID,
-                 password: str):
-        self.user_id = user_id
-        self.password = password
+    user_id: UUID
+    password: str
+
+
+@dataclass(frozen=True)
+class PhoneIsChanged(DomainEvent):
+    user_id: UUID
+    phone: int
+
+
+@dataclass(frozen=True)
+class EmailIsChanged(DomainEvent):
+    user_id: UUID
+    email: str
+
+
+@dataclass(frozen=True)
+class DateOfBornIsChanged(DomainEvent):
+    user_id: UUID
+    date_of_born: str

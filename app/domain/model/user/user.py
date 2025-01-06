@@ -1,20 +1,12 @@
 from app.domain.shared.base_entity import BaseEntity
 from app.domain.shared.event import DomainEvent
 from app.domain.shared.unit_of_work import UnitOfWorkTracker
-from app.domain.model.user.value_objects import Username, Password, Phone, Email, DateOfBorn
 from app.domain.model.user.events import UserCreated, UserIsSignedIn, PasswordIsChanged
 from uuid import UUID
 
 
 class User[BaseEntity: UUID]:
-    def __init__(self,
-                  user_id: UUID,
-                  unit_of_work: UnitOfWorkTracker,
-                  username: Username,
-                  password: Password,
-                  phone: Phone,
-                  email: Email,
-                  date_of_born: DateOfBorn) -> None:
+    def __init__(self, user_id: UUID, unit_of_work: UnitOfWorkTracker, username: str, password: str, phone: int, email: str, date_of_born: str) -> None:
         self.user_id = user_id
         self.unit_of_work = unit_of_work
         self.username = username

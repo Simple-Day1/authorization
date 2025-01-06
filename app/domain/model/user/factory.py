@@ -12,13 +12,7 @@ class UserFactory:
         self.repository = repository
         self.unit_of_work = unit_of_work
     
-    async def create_user(self,
-                    user_id: UUID,
-                    username: str,
-                    password: str,
-                    phone: int | None,
-                    email: str| None,
-                    date_of_born: str | None):
+    async def create_user(self, user_id: UUID, username: str, password: str, phone: int | None, email: str| None, date_of_born: str | None):
         if email and await self.repository.with_email(email):
             raise UserAlreadyExistsError(message="User already exists")
 
