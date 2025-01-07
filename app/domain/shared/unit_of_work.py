@@ -5,17 +5,17 @@ from app.domain.shared.base_entity import BaseEntity
 
 class UnitOfWorkTracker(Protocol):
     @abstractmethod
-    def register_new(self, entity: BaseEntity):
+    def register_new(self, entity: BaseEntity) -> None:
         raise NotImplementedError
     
     @abstractmethod
-    def register_dirty(self, entity: BaseEntity):
+    def register_dirty(self, entity: BaseEntity) -> None:
         raise NotImplementedError
     
     @abstractmethod
-    def register_deleted(self, entity: BaseEntity):
+    def register_deleted(self, entity: BaseEntity) -> None:
         raise NotImplementedError
     
     @abstractmethod
-    def register_clean(self, entity: BaseEntity):
+    def register_clean(self, entity: BaseEntity) -> None:
         raise NotImplementedError

@@ -6,38 +6,31 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class UserCreated(DomainEvent):
     user_id: UUID
-    username: str
+    firstname: str
+    middlename: str
+    lastname: str
     password: str
-    phone: int
-    email: str
     date_of_born: str
 
 
 @dataclass(frozen=True)
-class UsernameIsChanged(DomainEvent):
+class FullnameIsChanged(DomainEvent):
     user_id: UUID
-    username: str
+    firstname: str
+    middlename: str | None
+    lastname: str
 
 
 @dataclass(frozen=True)
-class PasswordIsChanged(DomainEvent):
+class ContactsIsChanged(DomainEvent):
     user_id: UUID
-    password: str
-
-
-@dataclass(frozen=True)
-class PhoneIsChanged(DomainEvent):
-    user_id: UUID
-    phone: int
-
-
-@dataclass(frozen=True)
-class EmailIsChanged(DomainEvent):
-    user_id: UUID
-    email: str
+    email: str | None
+    phone: int | None
 
 
 @dataclass(frozen=True)
 class DateOfBornIsChanged(DomainEvent):
     user_id: UUID
-    date_of_born: str
+    day: int
+    month: int
+    year: int
