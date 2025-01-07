@@ -26,7 +26,7 @@ class UserFactory:
             email: str| None, 
             day: str,
             month: str,
-            year: str):
+            year: str) -> User:
         if email and await self.repository.with_email(email):
             raise UserAlreadyExistsError(message="User already exists")
 
