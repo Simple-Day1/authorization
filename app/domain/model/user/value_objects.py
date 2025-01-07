@@ -14,7 +14,7 @@ class Fullname:
     middlename: str | None
 
 @dataclass(frozen=True)
-class DateOfBorn:
-    day: int
-    month: int
-    year: int
+class Date:
+    day: str
+    month: str
+    year: str
