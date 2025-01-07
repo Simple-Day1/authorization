@@ -4,7 +4,6 @@ from app.domain.model.user.repository import UserRepository
 from app.domain.shared.unit_of_work import UnitOfWorkTracker
 from app.domain.model.user.exceptions import UserAlreadyExistsError
 from app.domain.model.user.value_objects import Contacts, Fullname, Date
-from datetime import datetime
 from uuid import UUID
 
 
