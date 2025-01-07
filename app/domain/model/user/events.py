@@ -10,7 +10,10 @@ class UserCreated(DomainEvent):
     middlename: str
     lastname: str
     password: str
-    date_of_born: str
+    day: str
+    month: str
+    year: str
+
 
 
 @dataclass(frozen=True)

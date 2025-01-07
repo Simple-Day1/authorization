@@ -3,7 +3,7 @@ from app.domain.model.user.events import UserCreated
 from app.domain.model.user.repository import UserRepository
 from app.domain.shared.unit_of_work import UnitOfWorkTracker
 from app.domain.model.user.exceptions import UserAlreadyExistsError
-from app.domain.model.user.value_objects import Contacts, Fullname
+from app.domain.model.user.value_objects import Contacts, Fullname, Date
 from datetime import datetime
 from uuid import UUID
 
@@ -25,7 +25,9 @@ class UserFactory:
             password: str, 
             phone: int | None, 
             email: str| None, 
-            date_of_born: str | None):
+            day: str,
+            month: str,
+            year: str):
         if email and await self.repository.with_email(email):
             raise UserAlreadyExistsError(message="User already exists")
 
@@ -35,7 +37,8 @@ class UserFactory:
 
         fullname = Fullname(firstname=firstname, middlename=middlename, lastname=lastname)
         contacts = Contacts(email=email, phone=phone)
-        user = User(user_id, self.unit_of_work, fullname, password, phone, email, date_of_born)
-        user.record_event(UserCreated(user.user_id, fullname, password, phone, email, date_of_born))
+        date = Date(day=day, month=month, year=year)
+        user = User(user_id, self.unit_of_work, fullname, contacts, date)
+        user.record_event(UserCreated(user.user_id, fullname, password, phone, email, day, month, year))
 
         return user

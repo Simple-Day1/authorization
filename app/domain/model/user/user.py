@@ -4,7 +4,6 @@ from app.domain.shared.unit_of_work import UnitOfWorkTracker
 from app.domain.model.user.events import FullnameIsChanged, ContactsIsChanged, DateOfBornIsChanged
 from app.domain.model.user.value_objects import Fullname, Contacts, Date
 from uuid import UUID
-from datetime import datetime, UTC
 
 
 class User[BaseEntity: UUID]:
@@ -14,12 +13,12 @@ class User[BaseEntity: UUID]:
             unit_of_work: UnitOfWorkTracker, 
             fullname: Fullname,
             contacts: Contacts,
-            date_of_born: Date) -> None:
+            date: Date) -> None:
         self.user_id = user_id
         self.unit_of_work = unit_of_work
         self.fullname = fullname
         self.contacts = contacts
-        self.date_of_born = date_of_born
+        self.date = date
         self._event: list[DomainEvent] = []
         super().__init__(user_id)
 
@@ -42,8 +41,8 @@ class User[BaseEntity: UUID]:
             self.unit_of_work.register_dirty(self)
             self.record_event(ContactsIsChanged(self.user_id, email, phone))
 
-        def change_date_of_born(self, day: int, month: int, year: int) -> None:
-            self.date_of_born = Date(day, month, year)
+        def change_date(self, day: int, month: int, year: int) -> None:
+            self.date = Date(day, month, year)
             self.unit_of_work.register_dirty(self)
             self.record_event(DateOfBornIsChanged(self.user_id, day, month, year))
         
