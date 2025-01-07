@@ -22,27 +22,27 @@ class User[BaseEntity: UUID]:
         self._event: list[DomainEvent] = []
         super().__init__(user_id)
 
-        def record_event(self, event: DomainEvent):
-            self._event.append(event)
+    def record_event(self, event: DomainEvent) -> None:
+        self._event.append(event)
 
-        def raise_event(self, event: DomainEvent):
-            events = self._event.copy()
-            self._event.clear()
+    def raise_event(self) -> list[DomainEvent]:
+        events = self._event.copy()
+        self._event.clear()
 
-            return events
+        return events
 
-        def change_fullname(self, firstname: str, middlename: str | None, lastname: str) -> None:
-            self.fullname = Fullname(firstname=firstname, middlename=middlename, lastname=lastname)
-            self.unit_of_work.register_dirty(self)
-            self.record_event(FullnameIsChanged(self.user_id, firstname, middlename, lastname))
+    def change_fullname(self, firstname: str, middlename: str | None, lastname: str) -> None:
+        self.fullname = Fullname(firstname=firstname, middlename=middlename, lastname=lastname)
+        self.unit_of_work.register_dirty(self)
+        self.record_event(FullnameIsChanged(self.user_id, firstname, middlename, lastname))
 
-        def change_contacts(self, email: str, phone: int) -> None:
-            self.contacts = Contacts(email, phone)
-            self.unit_of_work.register_dirty(self)
-            self.record_event(ContactsIsChanged(self.user_id, email, phone))
+    def change_contacts(self, email: str, phone: int) -> None:
+        self.contacts = Contacts(email, phone)
+        self.unit_of_work.register_dirty(self)
+        self.record_event(ContactsIsChanged(self.user_id, email, phone))
 
-        def change_date(self, day: int, month: int, year: int) -> None:
-            self.date = Date(day, month, year)
-            self.unit_of_work.register_dirty(self)
-            self.record_event(DateOfBornIsChanged(self.user_id, day, month, year))
+    def change_date(self, day: int, month: int, year: int) -> None:
+        self.date = Date(day, month, year)
+        self.unit_of_work.register_dirty(self)
+        self.record_event(DateOfBornIsChanged(self.user_id, day, month, year))
         
