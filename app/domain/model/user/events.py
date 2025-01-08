@@ -9,7 +9,6 @@ class UserCreated(DomainEvent):
     firstname: str
     middlename: str
     lastname: str
-    password: str
     day: str
     month: str
     year: str

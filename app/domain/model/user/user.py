@@ -8,19 +8,19 @@ from uuid import UUID
 
 class User[BaseEntity: UUID]:
     def __init__(
-            self, 
-            user_id: UUID, 
-            unit_of_work: UnitOfWorkTracker, 
-            fullname: Fullname,
-            contacts: Contacts,
-            date: Date) -> None:
+        self, 
+        user_id: UUID, 
+        unit_of_work: UnitOfWorkTracker, 
+        fullname: Fullname,
+        contacts: Contacts,
+        date: Date) -> None:
+        super().__init__(user_id)
         self.user_id = user_id
         self.unit_of_work = unit_of_work
         self.fullname = fullname
         self.contacts = contacts
         self.date = date
         self._event: list[DomainEvent] = []
-        super().__init__(user_id)
 
     def record_event(self, event: DomainEvent) -> None:
         self._event.append(event)

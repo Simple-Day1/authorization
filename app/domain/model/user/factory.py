@@ -9,24 +9,23 @@ from uuid import UUID
 
 class UserFactory:
     def __init__(
-            self, 
-            repository: UserRepository, 
-            unit_of_work: UnitOfWorkTracker) -> None:
+        self, 
+        repository: UserRepository, 
+        unit_of_work: UnitOfWorkTracker) -> None:
         self.repository = repository
         self.unit_of_work = unit_of_work
     
     async def create_user(
-            self, 
-            user_id: UUID, 
-            firstname: str, 
-            middlename: str | None,
-            lastname: str,
-            password: str, 
-            phone: int | None, 
-            email: str| None, 
-            day: str,
-            month: str,
-            year: str) -> User:
+        self, 
+        user_id: UUID, 
+        firstname: str, 
+        middlename: str | None,
+        lastname: str,
+        phone: int | None, 
+        email: str| None, 
+        day: str,
+        month: str,
+        year: str) -> User:
         if email and await self.repository.with_email(email):
             raise UserAlreadyExistsError(message="User already exists")
 
@@ -38,6 +37,6 @@ class UserFactory:
         contacts = Contacts(email=email, phone=phone)
         date = Date(day=day, month=month, year=year)
         user = User(user_id, self.unit_of_work, fullname, contacts, date)
-        user.record_event(UserCreated(user.user_id, fullname, password, phone, email, day, month, year))
+        user.record_event(UserCreated(user.user_id, fullname, phone, email, day, month, year))
 
         return user
