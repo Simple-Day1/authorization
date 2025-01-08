@@ -20,14 +20,14 @@ class User[BaseEntity: UUID]:
         self.fullname = fullname
         self.contacts = contacts
         self.date = date
-        self._event: list[DomainEvent] = []
+        self._events: list[DomainEvent] = []
 
     def record_event(self, event: DomainEvent) -> None:
-        self._event.append(event)
+        self._events.append(event)
 
     def raise_event(self) -> list[DomainEvent]:
-        events = self._event.copy()
-        self._event.clear()
+        events = self._events.copy()
+        self._events.clear()
 
         return events
 
